@@ -1,76 +1,119 @@
 import confetti from "canvas-confetti";
 
-// Definir el tipo para las opciones de confetti
-type ConfettiOptions = {
-  spread: number;
-  startVelocity: number;
-  decay?: number;
-  scalar?: number;
-  particleCount?: number;
-  angle?: number;
-  gravity?: number;
-  ticks?: number;
-  origin?: { x?: number; y?: number };
+type ConfettiOptions = confetti.Options & {
+  shapes?: (confetti.Shape | string)[];
 };
 
 export function launchConfetti() {
-  const count = 150;
-  const defaults = {
-    origin: { y: 1 },
-    gravity: 1,
-    ticks: 400,
+  const scalar = 2;
+
+  // Agregar varios emojis
+  const emojis = ["💰", "💸", "✨🐹", "🏆"].map((emoji) =>
+    confetti.shapeFromText({ text: emoji, scalar })
+  );
+
+  const defaults: ConfettiOptions = {
+    spread: 360,
+    ticks: 60,
+    gravity: 0,
+    decay: 0.96,
+    startVelocity: 20,
+    shapes: emojis, // Usamos el array de emojis
+    scalar,
   };
 
-  function fire(particleRatio: number, opts: ConfettiOptions) {
+  function shoot() {
     confetti({
       ...defaults,
-      ...opts,
-      particleCount: Math.floor(count * particleRatio),
+      particleCount: 30,
+    });
+
+    confetti({
+      ...defaults,
+      particleCount: 5,
+      flat: true,
+    });
+
+    confetti({
+      ...defaults,
+      particleCount: 15,
+      scalar: scalar / 2,
+      shapes: ["circle"],
     });
   }
 
   const launchAnimation = () => {
-    fire(0.25, {
-      spread: 26,
-      startVelocity: 55,
-    });
-
-    setTimeout(() => {
-      fire(0.2, {
-        spread: 60,
-        startVelocity: 45,
-      });
-    }, 200);
-
-    setTimeout(() => {
-      fire(0.35, {
-        spread: 100,
-        decay: 0.95,
-        scalar: 0.8,
-        startVelocity: 50,
-      });
-    }, 400);
-
-    setTimeout(() => {
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 45,
-        decay: 0.96,
-        scalar: 1.2,
-      });
-    }, 600);
-
-    setTimeout(() => {
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 50,
-      });
-    }, 800);
+    shoot();
+    setTimeout(shoot, 100);
+    setTimeout(shoot, 200);
   };
 
-  // Llamar a la animación por primera vez
   launchAnimation();
+  const intervalId = setInterval(launchAnimation, 1500);
 
-  // Repetir la animación cada 6 segundos
-  setInterval(launchAnimation, 6000);
+  return intervalId;
 }
+// import confetti from "canvas-confetti";
+
+// type ConfettiOptions = confetti.Options & {
+//   shapes?: (confetti.Shape | string)[];
+// };
+
+// // Definir las formas desde rutas SVG
+// const coin = confetti.shapeFromPath({
+//   path: "M50 0a50 50 0 1 1-50 50A50 50 0 0 1 50 0z", // Círculo como moneda
+//   matrix: [0.2, 0, 0, 0.2, -5, -5],
+// });
+
+// const coin1 = confetti.shapeFromPath({
+//   path: "M50 0a50 50 0 1 1-50 50A50 50 0 0 1 50 0z", // Misma forma, diferente color
+//   matrix: [0.2, 0, 0, 0.2, -5, -5],
+// });
+
+// const coin2 = confetti.shapeFromPath({
+//   path: "M50 0a50 50 0 1 1-50 50A50 50 0 0 1 50 0z", // Misma forma, diferente color
+//   matrix: [0.2, 0, 0, 0.2, -5, -5],
+// });
+
+// export function launchConfetti() {
+//   const scalar = 2;
+
+//   const defaults: ConfettiOptions = {
+//     scalar,
+//     spread: 180,
+//     particleCount: 30,
+//     origin: { y: -0.1 },
+//     startVelocity: -35,
+//   };
+
+//   function shoot() {
+//     confetti({
+//       ...defaults,
+//       shapes: [coin],
+//       colors: ["#ffd700"], // Oro
+//     });
+
+//     confetti({
+//       ...defaults,
+//       shapes: [coin1],
+//       colors: ["#c0c0c0"], // Plata
+//     });
+
+//     confetti({
+//       ...defaults,
+//       shapes: [coin2],
+//       colors: ["#cd7f32"], // Bronce
+//     });
+//   }
+
+//   const launchAnimation = () => {
+//     shoot();
+//     setTimeout(shoot, 200);
+//     setTimeout(shoot, 400);
+//   };
+
+//   launchAnimation();
+//   const intervalId = setInterval(launchAnimation, 3000);
+
+//   return intervalId;
+// }
