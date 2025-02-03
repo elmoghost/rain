@@ -6,10 +6,11 @@ type ConfettiOptions = confetti.Options & {
 
 export function launchConfetti() {
   const count = 200;
-  const scalar = 2;
+  const scalar = 4; // Aumentar el tamaño de los emojis
 
-  const emojis = ["💰", "💸", "✨🐹", "🏆"].map((emoji) =>
-    confetti.shapeFromText({ text: emoji, scalar })
+  // Crear emojis como partículas
+  const emojis = ["💰", "💸", "✨🐹", "🏆"].map(
+    (emoji) => confetti.shapeFromText({ text: emoji, scalar }) // Aplicamos scalar para el tamaño
   );
 
   const defaults: ConfettiOptions = {
@@ -22,7 +23,7 @@ export function launchConfetti() {
       ...defaults,
       ...opts,
       particleCount: Math.floor(count * particleRatio),
-      shapes: emojis,
+      shapes: emojis, // Usar emojis como formas de confeti
     });
   }
 
