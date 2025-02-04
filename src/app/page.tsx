@@ -29,18 +29,30 @@ function HomePage() {
       confetti({
         ...defaults,
         particleCount: 30,
+        origin: { x: Math.random(), y: 0 }, // Aleatorio en X, siempre desde arriba
+        gravity: 1, // Caída hacia abajo
+        startVelocity: 10, // Velocidad inicial más baja
+        ticks: 100, // Duración mayor
       });
 
       confetti({
         ...defaults,
         particleCount: 5,
         flat: true,
+        origin: { x: Math.random(), y: 0 }, // Aleatorio en X
+        gravity: 1,
+        startVelocity: 10,
+        ticks: 100,
       });
 
       confetti({
         ...defaults,
         particleCount: 15,
         scalar: scalar / 2,
+        origin: { x: Math.random(), y: 0 },
+        gravity: 1,
+        startVelocity: 10,
+        ticks: 100,
       });
     }
 
