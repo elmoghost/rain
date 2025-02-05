@@ -42,13 +42,13 @@ function HomePage() {
   };
 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center min-h-screen max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 items-center justify-center min-h-screen max-w-md mx-auto">
       <div className="flex gap-4">
         <button
           onClick={handleSubmit}
           className="rounded-xl border py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 transition-colors"
         >
-          Dale aqui (+3 XP)
+          Click and earn (+3 XP)
         </button>
       </div>
 
