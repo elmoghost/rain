@@ -33,6 +33,7 @@ export default function SimulatedRaceButton() {
 
   useEffect(() => {
     const lastRaceWon = commits[commits.length - 1]?.wonRace;
+
     if (lastRaceWon === true) {
       shootCash();
     }
@@ -47,7 +48,7 @@ export default function SimulatedRaceButton() {
   //   }, [lastRaceWon]);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
       <Button onClick={startSimulation} disabled={running}>
         {running ? "Simulando..." : "Iniciar Simulación"}
       </Button>
