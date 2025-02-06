@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from "react";
 import { shootCash } from "./animation";
 import { Progress } from "@/components/ui/progress";
-import { SimulatedRaceButton } from "./test/page";
 
 function HomePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -65,9 +64,6 @@ function HomePage() {
           value={currentProgress}
           className="transition-all duration-500 ease-in-out"
         />
-      </div>
-      <div>
-        <SimulatedRaceButton />
       </div>
     </div>
   );

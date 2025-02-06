@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { shootCash } from "../animation";
 
-export function SimulatedRaceButton() {
+export default function SimulatedRaceButton() {
   const [commits, setCommits] = useState<{ id: string; wonRace: boolean }[]>(
     []
   );
